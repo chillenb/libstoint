@@ -33,20 +33,26 @@ double NonNormalizedOneCenterOverlap(int n12, double zeta1, double zeta2) {
     return n12 < -1 ? 0 : factorial[n12] / pow(zeta1 + zeta2, n12+1);
 }
 
+double NonNormalizedNuc(int n12, double zeta1, double zeta2, int Z) { // n12 = n1 + n2
+    return -Z * NonNormalizedOneCenterOverlap(n12-1, zeta1, zeta2);
+}
+
 // normalized
 double OneCenterNuclearAttraction(int n1, int n2, double zeta1, double zeta2, int Z) {
     return -Z * OneCenterOverlap(n1, n2, zeta1, zeta2) * (zeta1 + zeta2) / (n1 + n2);
 }
 
+double NonNormalizedOneCenterKE(int n1, int n2, int zeta1, int zeta2, int l) {
+  return 0.5 * (l * (l + 1) - n1 * (n1 - 1)) *
+             NonNormalizedOneCenterOverlap(n1 + n2 - 2, zeta1, zeta2) +
+         zeta1 * n1 * NonNormalizedOneCenterOverlap(n1 + n2 - 1, zeta1, zeta2) -
+         0.5 * zeta1 * zeta1 *
+             NonNormalizedOneCenterOverlap(n1 + n2, zeta1, zeta2);
+}
+
 double OneCenterKineticEnergy(int n1, int n2, int zeta1, int zeta2, int l) {
   const double normalization = NormCoef(n1, zeta1) * NormCoef(n2, zeta2);
-  const double integ =
-      0.5 * (l * (l + 1) - n1 * (n1 - 1)) *
-          NonNormalizedOneCenterOverlap(n1 + n2 - 2, zeta1, zeta2) +
-      zeta1 * n1 * NonNormalizedOneCenterOverlap(n1 + n2 - 1, zeta1, zeta2) -
-      0.5 * zeta1 * zeta1 *
-          NonNormalizedOneCenterOverlap(n1 + n2, zeta1, zeta2);
-  return normalization * integ;
+  return normalization * NonNormalizedOneCenterKE(n1, n2, zeta1, zeta1, l);
 }
 
 #endif  // aux_H
