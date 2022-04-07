@@ -11,19 +11,31 @@ using std::pow;
 
 TEST(NormCoefTest, SanityCheck)
 {
-  EXPECT_DOUBLE_EQ(NormCoef<2>(0.5), 0.2041241452319315);
+  EXPECT_DOUBLE_EQ(NormCoef(2,0.5), 0.2041241452319315);
 }
 
 TEST(QNormCoefTest, CheckVals)
 {
-  EXPECT_DOUBLE_EQ( (QNormCoef<2,2,4,4>(0.5,0.5,0.3,0.3)), 1.0414285714285717E-8 );
+  EXPECT_DOUBLE_EQ( (QNormCoef(2,2,4,4,0.5,0.5,0.3,0.3)), 1.0414285714285717E-8 );
 }
 
 TEST(OneCenterOverlapTest, CheckVals)
 {
-  EXPECT_RELNEAR( (OneCenterOverlap<2,3>(0.5,1.0)), 512.0/729.0 * sqrt(5.0/3.0), 1e-14);
-  EXPECT_RELNEAR( (OneCenterOverlap<1,1>(4.0,6.0)), (48*sqrt(6))/125., 1e-14);
-  EXPECT_RELNEAR( (OneCenterOverlap<10,12>(0.34,0.63)), 0.57753320411680154979, 1e-14);
+  EXPECT_RELNEAR( (OneCenterOverlap(2,3,0.5,1.0)), 512.0/729.0 * sqrt(5.0/3.0), 1e-14);
+  EXPECT_RELNEAR( (OneCenterOverlap(1,1,4.0,6.0)), (48*sqrt(6))/125., 1e-14);
+  EXPECT_RELNEAR( (OneCenterOverlap(10,12,0.34,0.63)), 0.57753320411680154979, 1e-14);
+}
+
+// H atom nuclear attraction is -1 hartree
+TEST(OneCenterNuclearAttraction, CheckVals)
+{
+  EXPECT_RELNEAR( (OneCenterNuclearAttraction(1, 1, 1, 1, 1)), -1., 1e-14);
+}
+
+// H atom KE is 0.5 hartree
+TEST(OneCenterKineticEnergy, CheckVals)
+{
+  EXPECT_RELNEAR( (OneCenterKineticEnergy(1, 1, 1, 1, 0)), 0.5, 1e-14);
 }
 
 int main(int argc, char **argv)

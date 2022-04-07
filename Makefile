@@ -1,7 +1,7 @@
 CC = gcc 
 CXX = g++
 LIBS = -lm
-TESTLIBS = -lgtest -lstoint
+TESTLIBS = -lgtest -Bstatic -l:libstoint.a
 
 FAST_CFLAGS = -g -O3 -march=native -ffast-math -Wall
 CFLAGS = $(FAST_CFLAGS)
@@ -71,4 +71,4 @@ tests: testbins
 testbins: $(TESTBINS) 
 
 $(TESTBINS): $(TESTSRCS) $(LIB)
-	$(CXX) $(INCLUDES) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) $(TESTLIBS) -o $@ $<
+	$(CXX) $(INCLUDES) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -o $@ $< $(TESTLIBS)
