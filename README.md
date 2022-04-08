@@ -28,7 +28,7 @@ $$ -->
 The inspiration for this approach was [3].
 
 ### Building
-If you have a modern C/C++ compiler and a *nix operating system you should be able to type `make -j [jobs]; make tests` as long as GoogleTest is installed. Unfortunately this project is not yet big enough to benefit from CMake. If you don't want to install GoogleTest system-wide, you may modify the Makefile to use a local copy, or just not run the tests.
+If you have a modern C/C++ compiler and a *nix operating system you should be able to type `make -j [jobs]; make tests` as long as GoogleTest is installed. If you don't want to install GoogleTest system-wide, you may modify the Makefile to use a local copy, or just not run the tests.
 
 ## References
 [1] M. Lesiuk and R. Moszynski, Reexamination of the Calculation of Two-Center, Two-Electron Integrals over Slater-Type Orbitals. I. Coulomb and Hybrid Integrals, Phys. Rev. E 90, (2014).
