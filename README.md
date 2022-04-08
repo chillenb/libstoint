@@ -13,7 +13,7 @@ All one-electron integrals are formed as linear combinations of overlap integral
 (n_1 + n_2, n_3 + n_4, l_1, l_2, l_3, l_4, m_1, m_2, m_3, m_4),
 $$ --> 
 <div align="center"><img style="background: white;" src="svg/BGKwrgDWmv.svg"></div>
- they are accessed via a (n automatically generated) lookup table. Symmetry and selection rules cut the number of functions down, but there are still a lot. The combinatorial explosion means this method is not really appropriate for large *l*.
+ they are accessed via a (n automatically generated) lookup table. Symmetry and selection rules cut the number of functions down, but there are still a lot. The combinatorial explosion means this method is not really appropriate for large <em>l</em>.
 
 The inspiration for this approach was [3].
 
