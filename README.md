@@ -14,7 +14,7 @@ The code has just started to work and is very immature.
 
 ### Capabilities
 
-Currently, libstoint can calculate all one-center one-electron integrals--overlap, nuclear attraction, and kinetic energy--and all one-center two-electron integrals up to <!-- $n=8$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/fLKkyFBTr5.svg"> and <!-- $l=3$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/ER3vwzUvbO.svg">.
+Currently, libstoint can calculate all one-center one-electron integrals--overlap, nuclear attraction, and kinetic energy--and all one-center two-electron integrals up to <!-- $n=4$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/XcnFb9iahE.svg"> and <!-- $l=3$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/ER3vwzUvbO.svg">.
 
 ### Method
 
