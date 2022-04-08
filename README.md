@@ -1,6 +1,16 @@
 # libstoint
 
-Computes atomic (one-center) 1- and 2-electron integrals over Slater-type orbitals. The code has just started to work and is very immature.
+Computes atomic (one-center) 1- and 2-electron integrals over Slater-type orbitals, defined per [1] as
+
+<!-- $$
+\chi_{nlm}(\mathbf{r};\zeta)=S_n(\zeta)r^{n-1} e^{-\zeta r}\, Y_{lm}(\theta,\phi)
+$$ --> 
+
+<div align="center"><img style="background: white;" src="svg/K5eJjaCOIR.svg"></div>
+
+where <!-- $S_n(\zeta)=(2\zeta)^{n+1/2} / \sqrt{(2n)!}$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/oYNINfj1ie.svg"> is a normalization constant.
+
+The code has just started to work and is very immature.
 
 ### Capabilities
 
