@@ -8,9 +8,12 @@ Currently, libstoint can calculate all one-center one-electron integrals--overla
 
 ### Method
 
-All one-electron integrals are formed as linear combinations of overlap integrals, see [2]. Expressions for the two-electron integrals are calculated in Mathematica using the general formula from [1] (supplementary info) and exported as C functions. Because there is one such expression for each value of <!-- $$(n_1+n_2, n_3+n_4, l_1, l_2, l_3, l_4, m_1, m_2, m_3, m_4),$$ --> 
-
-<div align="center"><img style="background: white;" src="svg/UGCvG0vSSX.svg"></div> they are accessed via a (n automatically generated) lookup table. Symmetry and selection rules cut the number of functions down, but there are still a lot. The combinatorial explosion means this method is not really appropriate for large <!-- $l$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/Sv58pwYTIH.svg">.
+All one-electron integrals are formed as linear combinations of overlap integrals, see [2]. Expressions for the two-electron integrals are calculated in Mathematica using the general formula from [1] (supplementary info) and exported as C functions. Because there is one such expression for each value of
+<!-- $$
+(n_1 + n_2, n_3 + n_4, l_1, l_2, l_3, l_4, m_1, m_2, m_3, m_4),
+$$ --> 
+<div align="center"><img style="background: white;" src="svg/BGKwrgDWmv.svg"></div>
+ they are accessed via a (n automatically generated) lookup table. Symmetry and selection rules cut the number of functions down, but there are still a lot. The combinatorial explosion means this method is not really appropriate for large <!-- $l$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/GBg5oX5BbL.svg">.
 
 The inspiration for this approach was [3].
 
