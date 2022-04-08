@@ -5,13 +5,12 @@ LIBS = -lm
 TESTLIBS = -lgtest -Bstatic -l:libstoint.a
 
 FAST_CFLAGS = -g -O3 -march=native -ffast-math -Wall
-CFLAGS = -g -Wall -Og
+CFLAGS = $(FAST_CFLAGS) #-g -Wall -Og
 CXXFLAGS = -std=c++17
 
 
 
 SRCDIR := stoint
-INTSRCDIR := stoint/twoeints
 OBJDIR := obj
 INCDIR := include
 TESTDIR := test
@@ -20,10 +19,11 @@ BUILDDIR := build
 INCLUDES = -I $(INCDIR) -I.
 
 SRCS := $(foreach x, $(SRCDIR), $(wildcard $(addprefix $(x)/*,.c*))) 
-INTSRCS := $(foreach x, $(INTSRCDIR), $(wildcard $(addprefix $(x)/*,.c*)))
+INTSRCS := $(foreach x, $(SRCDIR)/twoeints, $(wildcard $(addprefix $(x)/*,.c*))) $(foreach x, $(SRCDIR)/twoehelper, $(wildcard $(addprefix $(x)/*,.c*)))
 
 OBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 INTOBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(notdir $(basename $(INTSRCS)))))
+
 
 TESTSRCS := $(foreach x, $(TESTDIR), $(wildcard $(addprefix $(x)/*,.c*)))
 #TESTOBJS := $(addprefix $(OBJDIR)/, $(addsuffix .o, $(notdir $(basename $(TESTSRCS)))))
@@ -62,17 +62,24 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cc
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -c $(INCLUDES) $(CFLAGS) -o $@ $<
 
-$(OBJDIR)/%.o: $(INTSRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/twoeints/%.c
 	$(CC) -c $(INCLUDES) $(CFLAGS) -o $@ $<
 
-.PHONY: depend clean makedir
+$(OBJDIR)/%.o: $(SRCDIR)/twoehelper/%.c
+	$(CC) -c $(INCLUDES) $(CFLAGS) -o $@ $<
+
+.PHONY: depend clean makedir halfclean
 
 makedir:
 	@mkdir -p $(OBJDIR) $(BUILDDIR)
 
-clean:
+halfclean:
 	@echo CLEAN $(OBJS) $(LIB) $(TESTBINS)
 	@rm -f $(OBJS) $(LIB) $(TESTBINS)
+
+clean: halfclean
+	@echo CLEAN $(INTOBJS) $(OBJDIR)/combined.o
+	@rm -f $(INTOBJS) $(OBJDIR)/combined.o
 
 depend: $(SRCS)
 	makedepend $^

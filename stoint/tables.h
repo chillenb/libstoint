@@ -6,7 +6,6 @@ extern "C" {
 extern double factorial[41];
 extern double sqrtfactorial[41];
 
-
 #ifdef __cplusplus
 }
 #endif

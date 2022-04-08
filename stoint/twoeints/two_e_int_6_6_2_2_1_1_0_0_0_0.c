@@ -1,5 +1,10 @@
 #include <tgmath.h>
 
 double two_e_int_6_6_2_2_1_1_0_0_0_0(double z12, double z34) {
-    return (3456*(25*pow(z12,10) + 275*pow(z12,9)*z34 + 1383*pow(z12,8)*pow(z34,2) + 4213*pow(z12,7)*pow(z34,3) + 8690*pow(z12,6)*pow(z34,4) + 12870*pow(z12,5)*pow(z34,5) + 8690*pow(z12,4)*pow(z34,6) + 4213*pow(z12,3)*pow(z34,7) + 1383*pow(z12,2)*pow(z34,8) + 275*z12*pow(z34,9) + 25*pow(z34,10)))/(pow(z12,6)*pow(z34,6)*pow(z12 + z34,11));
+  return (3456 *
+          (25 * pow(z12, 10) + 275 * pow(z12, 9) * z34 + 1383 * pow(z12, 8) * pow(z34, 2) +
+           4213 * pow(z12, 7) * pow(z34, 3) + 8690 * pow(z12, 6) * pow(z34, 4) + 12870 * pow(z12, 5) * pow(z34, 5) +
+           8690 * pow(z12, 4) * pow(z34, 6) + 4213 * pow(z12, 3) * pow(z34, 7) + 1383 * pow(z12, 2) * pow(z34, 8) +
+           275 * z12 * pow(z34, 9) + 25 * pow(z34, 10))) /
+         (pow(z12, 6) * pow(z34, 6) * pow(z12 + z34, 11));
 }
