@@ -13,6 +13,29 @@
 using std::pow;
 using std::sqrt;
 
+TEST(lcoef1, CrashAndBurn) {
+  CLOSE_ENOUGH((lcoef1(5,1,2,3,4)), 72./sqrt(M_PI));
+  CLOSE_ENOUGH((lcoef1(1,3,5,3,5)), sqrt(M_PI)/8.);
+}
+
+TEST(lcoef2, CrashAndBurn) {
+  CLOSE_ENOUGH( (lcoef2(3,3,4)), sqrt(sqrt(M_PI) / 77.));
+}
+
+TEST(lcoef, CrashAndBurn) {
+  CLOSE_ENOUGH((lcoef(3,3,4,3,6)), -10./77. * sqrt(2./39.));
+}
+
+TEST(gammas, CrashAndBurn) {
+  CLOSE_ENOUGH((half_recip_gamma(3)), 2./sqrt(M_PI));
+  CLOSE_ENOUGH((half_recip_gamma(-3)), 3./(4*sqrt(M_PI)));
+  CLOSE_ENOUGH((half_gamma(-3)), (4*sqrt(M_PI))/3. );
+  CLOSE_ENOUGH((half_gamma(3)), sqrt(M_PI)/2. );
+}
+
+
+
+
 TEST(NormCoefTest, CrashAndBurn) { CLOSE_ENOUGH(NormCoef(2, 0.5), 0.2041241452319315); }
 
 TEST(QNormCoefTest, CrashAndBurn) { CLOSE_ENOUGH((QNormCoef(2, 2, 4, 4, 0.5, 0.5, 0.3, 0.3)), 1.0414285714285717E-8); }
@@ -38,6 +61,9 @@ TEST(OneCenterERI, CrashAndBurn) {
   CLOSE_ENOUGH(two_e_int({1, 0, 0, 1., 2, 1, 0, 1., 3, 2, 2, 1., 4, 3, 2, 1.}), 0.02604299528923668)
       << "(1s 2p | 3d 4f) didn't work";
 }
+
+
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

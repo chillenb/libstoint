@@ -3,9 +3,15 @@
 
 #include "stoint/tables.h"
 #include <cmath>
+#include <iostream>
 
 using std::pow;
 using std::sqrt;
+using std::tgamma;
+
+static double quickexp2(int i) {
+  return (i >= 0) ? ((double) (1UL<<i)) : 1.0 / ((double) (1UL<<(-i)));
+}
 
 // Normalization constant for X_nlm(r;zeta) is S(n,zeta)=(2 zeta)^(n+1/2) / sqrt((2n)!)
 //
@@ -44,6 +50,47 @@ static double NonNormalizedOneCenterKE(int n1, int n2, int zeta1, int zeta2, int
 static double OneCenterKineticEnergy(int n1, int n2, int zeta1, int zeta2, int l) {
   const double normalization = NormCoef(n1, zeta1) * NormCoef(n2, zeta2);
   return normalization * NonNormalizedOneCenterKE(n1, n2, zeta1, zeta1, l);
+}
+
+static double lcoef1(int L, int l1, int l2, int l3, int l4) {
+  const int denom1 = 1-L-l1+l2;
+  const int denom2 = 1-L-l3+l4;
+  const int sign = ((l1+l3-2*L) % 2 == 0) ? 1 : -1;
+  const int p2 = -1 + 2*L + l1 - l2 + l3 - l4;
+  const double p22 = quickexp2(p2);
+  return sqrt(M_PI)*sign*p22*half_recip_gamma(denom1)*half_recip_gamma(denom2);
+}
+
+static double lcoef2(int L, int l1, int l2) {
+  return sqrt(
+    quickexp2(-L-l1+l2) *
+    half_gamma(L - l1 + l2 + 1) *
+    half_gamma(-L + l1 + l2 + 1) *
+    half_gamma(L + l1 + l2 + 2) *
+    half_recip_gamma(2*(L + l1 - l2 + 1)) *
+    half_recip_gamma(L - l1 + l2 + 2) *
+    half_recip_gamma(-L + l1 + l2 + 2) *
+    half_recip_gamma(L + l1 + l2 + 3)
+  );
+}
+
+// static double lcoef2(int L, int l1, int l2) {
+//   return sqrt(
+//     pow(2., -L-l1+l2) *
+//     tgamma(0.5*(L - l1 + l2 + 1)) *
+//     tgamma(0.5*(-L + l1 + l2 + 1)) *
+//     tgamma(0.5*(L + l1 + l2 + 2)) / (
+//     tgamma((L + l1 - l2 + 1)) *
+//     tgamma(0.5*(L - l1 + l2 + 2)) *
+//     tgamma(0.5*(-L + l1 + l2 + 2)) *
+//     tgamma(0.5*(L + l1 + l2 + 3))
+//     )
+//   );
+// }
+
+
+static double lcoef(int L, int l1, int l2, int l3, int l4) {
+  return lcoef1(L,l1,l2,l3,l4) * lcoef2(L,l1,l2) * lcoef2(L,l3,l4);
 }
 
 #endif // aux_H

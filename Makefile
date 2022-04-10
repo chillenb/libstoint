@@ -1,4 +1,4 @@
-CC = gcc 
+CC = gcc
 CXX = g++
 LD = ld
 LIBS = -lm
@@ -6,6 +6,8 @@ TESTLIBS = -lgtest -Bstatic -l:libstoint.a
 
 FAST_CFLAGS = -g -O3 -march=native -ffast-math -Wall
 CFLAGS = $(FAST_CFLAGS) #-g -Wall -Og
+#CFLAGS =  -g -Wall -Og
+LDFLAGS = 
 CXXFLAGS = -std=c++17
 
 
@@ -54,7 +56,7 @@ $(LIB): $(OBJS) $(OBJDIR)/combined.o
 $(TARGET): $(OBJS)
 	@echo $(SRCS)
 	@echo $(OBJS)
-	$(CXX) $(CFLAGS) -o $(TARGET) $(OBJS) $(LIBS) $(TESTLIBS)
+	$(CXX) $(CFLAGS) -o $(TARGET) $(OBJS) $(LIBS) $(TESTLIBS) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc
 	$(CXX) -c $(INCLUDES) $(CFLAGS) $(CXXFLAGS) -o $@ $<
@@ -73,11 +75,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/twoehelper/%.c
 makedir:
 	@mkdir -p $(OBJDIR) $(BUILDDIR)
 
-halfclean:
+clean:
 	@echo CLEAN $(OBJS) $(LIB) $(TESTBINS)
 	@rm -f $(OBJS) $(LIB) $(TESTBINS)
 
-clean: halfclean
+fullclean: clean
 	@echo CLEAN $(INTOBJS) $(OBJDIR)/combined.o
 	@rm -f $(INTOBJS) $(OBJDIR)/combined.o
 
@@ -90,7 +92,7 @@ tests: testbins
 testbins: $(TESTBINS) 
 
 $(TESTBINS): $(TESTSRCS) $(LIB)
-	$(CXX) $(INCLUDES) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -o $@ $< $(TESTLIBS)
+	$(CXX) $(INCLUDES) $(LDFLAGS) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -o $@ $< $(TESTLIBS)
 
 showinfo:
 	@echo $(INTOBJS)
