@@ -13,12 +13,16 @@ inline void cswap(orbital &one, orbital &two) {
 }
 
 void sortq(quartet &q) {
+  if(q[2].n + q[3].n > q[0].n + q[1].n) {
+    std::swap(q[0],q[2]);
+    std::swap(q[1],q[3]);
+  }
   cswap(q[0], q[1]);
   cswap(q[2], q[3]);
-  if (q[0].l < q[2].l) {
-    std::swap(q[0], q[2]);
-    std::swap(q[1], q[3]);
-  }
+  //if (q[0].l < q[2].l) {
+  //  std::swap(q[0], q[2]);
+  //  std::swap(q[1], q[3]);
+  //}
 }
 
 void checko(orbital o) {

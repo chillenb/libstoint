@@ -50,7 +50,7 @@ TEST(OneCenterOverlapTest, CrashAndBurn) {
 TEST(OneCenterNuclearAttraction, CrashAndBurn) { CLOSE_ENOUGH((OneCenterNuclearAttraction(1, 1, 1, 1, 1)), -1.); }
 
 // H atom KE is 0.5 hartree
-TEST(OneCenterKineticEnergy, CrashAndBurn) { CLOSE_ENOUGH((OneCenterKineticEnergy(1, 1, 1, 1, 0)), 0.5); }
+TEST(OneCenterLaplacian, CrashAndBurn) { CLOSE_ENOUGH((OneCenterLaplacian(1, 1, 1, 1, 0)), -1.); }
 
 TEST(OneCenterERI, CrashAndBurn) {
   two_int_init();

@@ -1,11 +1,12 @@
-CC = gcc
-CXX = g++
+#CC = gcc
+#CXX = g++
 LD = ld
 LIBS = -lm
 TESTLIBS = -lgtest -Bstatic -l:libstoint.a
+MODLIBS = -Bstatic -l:libstoint.a
 
-FAST_CFLAGS = -g -O3 -march=native -ffast-math -Wall
-CFLAGS = $(FAST_CFLAGS) #-g -Wall -Og
+FAST_CFLAGS = -g -O0 -march=native -ffast-math -Wall
+CFLAGS = $(FAST_CFLAGS) -fPIC #-g -Wall -Og
 #CFLAGS =  -g -Wall -Og
 LDFLAGS = 
 CXXFLAGS = -std=c++17
@@ -17,6 +18,7 @@ OBJDIR := obj
 INCDIR := include
 TESTDIR := test
 BUILDDIR := build
+PYMODDIR := pymod
 
 INCLUDES = -I $(INCDIR) -I.
 
@@ -33,6 +35,10 @@ TESTBINS := $(addprefix $(BUILDDIR)/, $(notdir $(basename $(TESTSRCS))))
 
 LIB = $(BUILDDIR)/libstoint.a
 
+PYMODSRCS  :=  $(foreach x, $(PYMODDIR), $(wildcard $(addprefix $(x)/*,.cc*)))
+
+SUFX := $(shell python3-config --extension-suffix)
+PYMOD := $(addsuffix $(SUFX), stoint)
 
 DEPS = $(OBJS:.o:.d)
 
@@ -70,7 +76,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/twoeints/%.c
 $(OBJDIR)/%.o: $(SRCDIR)/twoehelper/%.c
 	$(CC) -c $(INCLUDES) $(CFLAGS) -o $@ $<
 
-.PHONY: depend clean makedir halfclean
+.PHONY: depend clean makedir halfclean moduleclean
 
 makedir:
 	@mkdir -p $(OBJDIR) $(BUILDDIR)
@@ -93,6 +99,15 @@ testbins: $(TESTBINS)
 
 $(TESTBINS): $(TESTSRCS) $(LIB)
 	$(CXX) $(INCLUDES) $(LDFLAGS) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -o $@ $< $(TESTLIBS)
+
+module: $(PYMOD)
+	@echo $(PYMOD)
+
+moduleclean:
+	@rm -f $(PYMOD)
+
+$(PYMOD): $(PYMODSRCS) $(LIB)
+	$(CXX) $(INCLUDES) $(LDFLAGS) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) $(shell python3-config --ldflags --libs --cflags) -fopenmp -std=c++11 -shared -fPIC -Bstatic $(shell python3 -m pybind11 --includes) -o $@ $< $(MODLIBS)
 
 showinfo:
 	@echo $(INTOBJS)
