@@ -31,6 +31,8 @@ The inspiration for this approach was [3].
 ### Building
 If you have a modern C/C++ compiler and a *nix operating system you may then run `make -j [jobs]; make tests`. For building and running the tests, you need GoogleTest. If you don't want to install it system-wide, you may modify the Makefile to use a local copy, or just not run the tests.
 
+To build the rudimentary Python module, make sure Python is configured the way you want, and then type `make module`.
+
 ## References
 [1] M. Lesiuk and R. Moszynski, Reexamination of the Calculation of Two-Center, Two-Electron Integrals over Slater-Type Orbitals. I. Coulomb and Hybrid Integrals, Phys. Rev. E 90, (2014).
 
