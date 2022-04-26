@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#define MAXAM 3
+#define MAXAM 2
 
 inline int LIDX(int l1, int l2, int l3, int l4, int m1, int m2, int m3, int m4) {
   return ((m4 + l4) + (2 * l4 + 1) * ((m3 + l3) + (2 * l3 + 1) * ((m2 + l2) + (2 * l2 + 1) * (m1))));

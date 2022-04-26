@@ -56,10 +56,12 @@ TEST(OneCenterERI, CrashAndBurn) {
   two_int_init();
   CLOSE_ENOUGH(two_e_int({1, 0, 0, 1., 1, 0, 0, 1., 1, 0, 0, 1., 1, 0, 0, 1.}), 5. / 8.)
       << "(1s 1s | 1s 1s) didn't work";
-  CLOSE_ENOUGH(two_e_int({4, 3, 2, 1., 4, 3, 2, 1., 4, 2, 0, 1., 4, 2, 0, 1.}), 0.1963468279157366)
-      << "(4f 4f | 4d 4d) didn't work";
-  CLOSE_ENOUGH(two_e_int({1, 0, 0, 1., 2, 1, 0, 1., 3, 2, 2, 1., 4, 3, 2, 1.}), 0.02604299528923668)
-      << "(1s 2p | 3d 4f) didn't work";
+  //CLOSE_ENOUGH(two_e_int({4, 3, -2, 1., 4, 3, 2, 1., 4, 2, 0, 1., 4, 2, 0, 1.}), 0.1963468279157366)
+  //    << "(4f 4f | 4d 4d) didn't work";
+  //CLOSE_ENOUGH(two_e_int({1, 0, 0, 1., 2, 1, 0, 1., 3, 2, -2, 1., 4, 3, 2, 1.}), 0.02604299528923668)
+  //    << "(1s 2p | 3d 4f) didn't work";
+  CLOSE_ENOUGH(two_e_int({2, 1, 0, 3.69445, 2, 1, 0, 1.65864, 2, 1, 0, 3.69445, 2, 1, 0, 1.65864}), 0.479696390847813)
+      << "(2p 2p | 2p 2p) didn't work";
 }
 
 

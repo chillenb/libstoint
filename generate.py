@@ -63,7 +63,7 @@ def gen_tbl_init(output, dir, namestub, MAXN, MAXAM):
     output.write("typedef double (*two_e_func) (double, double);\n")
     output.write("double retzero(double z12, double z34) {return 0.;}\n")
     for n12 in range(2, 2*MAXN+1):
-        for n34 in range(2, min(n12, 2*MAXN) + 1):
+        for n34 in range(2, 2*MAXN + 1):
             for l1 in range(min(n12-2, MAXAM) +1 ):
                 for l2 in range(min(n12-l1-2, MAXAM) + 1):
                     for l3 in range(min(n34-2, MAXAM) + 1):
@@ -85,7 +85,7 @@ def gen_header(output, namestub, MAXN, MAXAM):
     output.write("void two_int_init();\n")
 
     for n12 in range(2, 2*MAXN+1):
-        for n34 in range(2, min(n12, 2*MAXN) + 1):
+        for n34 in range(2, 2*MAXN + 1):
             #for l1 in range(min(n12-2, MAXAM) +1 ):
             #    for l2 in range(min(n12-l1-2, MAXAM) + 1):
             #        for l3 in range(min(n34-2, MAXAM) + 1):
@@ -97,7 +97,7 @@ def gen_header(output, namestub, MAXN, MAXAM):
             output.write(f"extern two_e_funcarray {name}_lookup[{amsize12}][{amsize12}][{amsize34}][{amsize34}];\n")
     
     for n12 in range(2, 2*MAXN+1):
-        for n34 in range(2, min(n12, 2*MAXN) + 1):
+        for n34 in range(2, 2*MAXN + 1):
             for l1 in range(min(n12-2, MAXAM) +1 ):
                 for l2 in range(min(n12-l1-2, MAXAM) + 1):
                     for l3 in range(min(n34-2, MAXAM) + 1):
@@ -114,7 +114,7 @@ def gen_master_init(output, namestub, MAXN, MAXAM):
     output.write("#include \"two_e_tables.h\"\n")
     output.write(f"two_e_funcarray* two_e_master[{2*MAXN+1}][{2*MAXN+1}];\n")
     for n12 in range(2, 2*MAXN+1):
-        for n34 in range(2, min(n12, 2*MAXN) + 1):
+        for n34 in range(2, 2*MAXN + 1):
             amsize12 = MAXAM + 1
             amsize34 = MAXAM + 1
             mname = f"{namestub}_{n12}_{n34}"
@@ -133,7 +133,7 @@ def gen_master_init(output, namestub, MAXN, MAXAM):
 
     output.write("void two_int_init() {\n")
     for n12 in range(2, 2*MAXN+1):
-        for n34 in range(2, min(n12, 2*MAXN) + 1):
+        for n34 in range(2, 2*MAXN + 1):
             mname = f"{namestub}_{n12}_{n34}"
             output.write(f"    setup_{mname}();\n")
             output.write(f"    two_e_master[{n12}][{n34}] = (two_e_funcarray*) {mname}_lookup;\n")

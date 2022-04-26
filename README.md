@@ -10,11 +10,12 @@ $$ -->
 
 where <!-- $S_n(\zeta)=(2\zeta)^{n+1/2} / \sqrt{(2n)!}$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/oYNINfj1ie.svg"> is a normalization constant.
 
-The code has just started to work and is very immature.
+The code does not yet work! Do not use.
 
 ### Capabilities
 
-Currently, libstoint can calculate all one-center one-electron integrals--overlap, nuclear attraction, and kinetic energy--and all one-center two-electron integrals up to <!-- $n=4$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/XcnFb9iahE.svg"> and <!-- $l=3$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/ER3vwzUvbO.svg">.
+If it worked correctly, libstoint would be able to calculate all one-center one-electron integrals--overlap, nuclear attraction, and kinetic energy--and all one-center two-electron integrals up to <!-- $n=3, l=2$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/i98IDQtzDZ.svg">. Unfortunately, there are bugs which I do not yet understand.
+
 
 ### Method
 
@@ -28,7 +29,7 @@ $$ -->
 The inspiration for this approach was [3].
 
 ### Building
-First, extract the ERI code by running `./extract.sh`, or (equivalently), `tar -xzf stoint/twoeints.tar.gz -C stoint/`. If you have a modern C/C++ compiler and a *nix operating system you may then run `make -j [jobs]; make tests`. For building and running the tests, you need GoogleTest. If you don't want to install it system-wide, you may modify the Makefile to use a local copy, or just not run the tests.
+If you have a modern C/C++ compiler and a *nix operating system you may then run `make -j [jobs]; make tests`. For building and running the tests, you need GoogleTest. If you don't want to install it system-wide, you may modify the Makefile to use a local copy, or just not run the tests.
 
 ## References
 [1] M. Lesiuk and R. Moszynski, Reexamination of the Calculation of Two-Center, Two-Electron Integrals over Slater-Type Orbitals. I. Coulomb and Hybrid Integrals, Phys. Rev. E 90, (2014).

@@ -5,7 +5,7 @@ LIBS = -lm
 TESTLIBS = -lgtest -Bstatic -l:libstoint.a
 MODLIBS = -Bstatic -l:libstoint.a
 
-FAST_CFLAGS = -g -O0 -march=native -ffast-math -Wall
+FAST_CFLAGS = -g -O3 -march=native -ffast-math -Wall
 CFLAGS = $(FAST_CFLAGS) -fPIC #-g -Wall -Og
 #CFLAGS =  -g -Wall -Og
 LDFLAGS = 
@@ -98,7 +98,7 @@ tests: testbins
 testbins: $(TESTBINS) 
 
 $(TESTBINS): $(TESTSRCS) $(LIB)
-	$(CXX) $(INCLUDES) $(LDFLAGS) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -o $@ $< $(TESTLIBS)
+	$(CXX) -O0 $(INCLUDES) $(LDFLAGS) $(CFLAGS) $(CXXFLAGS) -L $(BUILDDIR) -O0 -o $@ $< $(TESTLIBS)
 
 module: $(PYMOD)
 	@echo $(PYMOD)

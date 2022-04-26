@@ -36,9 +36,9 @@ static double OneCenterOverlap(int n1, int n2, double zeta1, double zeta2) {
 //  return -Z * NonNormalizedOneCenterOverlap(n12 - 1, zeta1, zeta2);
 //}
 
-// normalized
+//normalized
 static double OneCenterNuclearAttraction(int n1, int n2, double zeta1, double zeta2, int Z) {
-  return -Z * OneCenterOverlap(n1, n2, zeta1, zeta2) * (zeta1 + zeta2) / (n1 + n2);
+ return -Z * OneCenterOverlap(n1, n2, zeta1, zeta2) * (zeta1 + zeta2) / (n1 + n2);
 }
 
 /*
